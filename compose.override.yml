@@ -1,30 +1,11 @@
 services:
-  plausible_db:
-    environment:
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_DB=${POSTGRES_DB}
-    networks: [webapps]
-
-  plausible_events_db:
-    environment:
-      - CLICKHOUSE_SKIP_USER_SETUP=1
-    networks: [webapps]
-
   plausible:
-    # HOST_PLAUSIBLE_PORT is a custom var you put in .env (e.g., 18080)
     ports:
-      - "${HOST_PLAUSIBLE_PORT:-18080}:8000"
-    environment:
-      - BASE_URL=${BASE_URL}
-      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
-      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@plausible_db:5432/${POSTGRES_DB}
-      - CLICKHOUSE_DATABASE_URL=http://plausible_events_db:8123/${CLICKHOUSE_DB}
-      - ADMIN_USER_EMAIL=${ADMIN_USER_EMAIL}
-      - ADMIN_USER_NAME=${ADMIN_USER_NAME}
-      - ADMIN_USER_PWD=${ADMIN_USER_PWD}
-    networks: [webapps]
+      - "${HOST_PORT:-18080}:${HTTP_PORT:-80}"
+    networks: [webapps, default]
 
 networks:
   webapps:
     external: true
+  default:
+    driver: bridge
