@@ -11,10 +11,10 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_DB=${POSTGRES_DB}
     # If you keep an external network, uncomment:
-    networks: [${DOCKER_NETWORK}]
+    networks: [webapps]
 
   plausible_events_db:
-    networks: [${DOCKER_NETWORK}]
+    networks: [webapps]
     # (No auth; DB created on first run via URL)
     environment:
       - CLICKHOUSE_SKIP_USER_SETUP=1
@@ -46,9 +46,9 @@ services:
       # - SMTP_USER_NAME=${SMTP_USER_NAME}
       # - SMTP_USER_PWD=${SMTP_USER_PWD}
       # - SMTP_HOST_SSL_ENABLED=${SMTP_HOST_SSL_ENABLED}
-    networks: [${DOCKER_NETWORK}]
+    networks: [webapps]
 
 # If you actually use an external network, uncomment:
 networks:
-  ${DOCKER_NETWORK}:
+  webapps:
     external: true
