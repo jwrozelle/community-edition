@@ -1,17 +1,15 @@
 services:
   plausible_db:
     networks: [webapps]
-
   plausible_events_db:
     networks: [webapps]
-
   plausible:
-    # publish only if Cloudflared on HOST needs to reach it; otherwise omit
-    ports:
-      - "${HTTP_PORT:-18080}:8000"   # CE listens on 8000 in-container
     networks: [webapps]
+    ports:
+      # host 18080 -> container 8000 (default)
+      # if you set HTTP_PORT=80 in .env, change right side to 80 instead
+      - "18080:8000"
 
 networks:
   webapps:
     external: true
-    name: webapps
