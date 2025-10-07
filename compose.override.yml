@@ -11,10 +11,10 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_DB=${POSTGRES_DB}
     # If you keep an external network, uncomment:
-    # networks: [${DOCKER_NETWORK}]
+    networks: [${DOCKER_NETWORK}]
 
   plausible_events_db:
-    # networks: [${DOCKER_NETWORK}]
+    networks: [${DOCKER_NETWORK}]
     # (No auth; DB created on first run via URL)
     environment:
       - CLICKHOUSE_SKIP_USER_SETUP=1
@@ -22,7 +22,8 @@ services:
   plausible:
     # Expose host port -> container 8000 (CE runs on 8000)
     ports:
-      - "${HOST_PLAUSIBLE_PORT:-18080}:8000"
+      - "${HTTP_PORT:-80}:${HTTP_PORT:-80}"
+      - "${HTTPS_PORT:-443}:${HTTPS_PORT:-443}"      
     environment:
       # Required
       - BASE_URL=${BASE_URL}
