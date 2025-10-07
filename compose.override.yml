@@ -30,24 +30,24 @@ services:
       # DBs
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@plausible_db:5432/${POSTGRES_DB}
       - CLICKHOUSE_DATABASE_URL=http://plausible_events_db:8123/${CLICKHOUSE_DB}
-      # Optional
-      - DISABLE_REGISTRATION=${DISABLE_REGISTRATION}
-      - ENABLE_EMAIL_VERIFICATION=${ENABLE_EMAIL_VERIFICATION}
+      # # Optional
+      # - DISABLE_REGISTRATION=${DISABLE_REGISTRATION}
+      # - ENABLE_EMAIL_VERIFICATION=${ENABLE_EMAIL_VERIFICATION}
       - ADMIN_USER_EMAIL=${ADMIN_USER_EMAIL}
       - ADMIN_USER_NAME=${ADMIN_USER_NAME}
       - ADMIN_USER_PWD=${ADMIN_USER_PWD}
-      # Mail (optional)
-      - MAILER_ADAPTER=${MAILER_ADAPTER}
-      - MAILER_EMAIL=${MAILER_EMAIL}
-      - MAILER_NAME=${MAILER_NAME}
-      - SMTP_HOST_ADDR=${SMTP_HOST_ADDR}
-      - SMTP_HOST_PORT=${SMTP_HOST_PORT}
-      - SMTP_USER_NAME=${SMTP_USER_NAME}
-      - SMTP_USER_PWD=${SMTP_USER_PWD}
-      - SMTP_HOST_SSL_ENABLED=${SMTP_HOST_SSL_ENABLED}
-    # networks: [${DOCKER_NETWORK}]
+      # # Mail (optional)
+      # - MAILER_ADAPTER=${MAILER_ADAPTER}
+      # - MAILER_EMAIL=${MAILER_EMAIL}
+      # - MAILER_NAME=${MAILER_NAME}
+      # - SMTP_HOST_ADDR=${SMTP_HOST_ADDR}
+      # - SMTP_HOST_PORT=${SMTP_HOST_PORT}
+      # - SMTP_USER_NAME=${SMTP_USER_NAME}
+      # - SMTP_USER_PWD=${SMTP_USER_PWD}
+      # - SMTP_HOST_SSL_ENABLED=${SMTP_HOST_SSL_ENABLED}
+    networks: [${DOCKER_NETWORK}]
 
 # If you actually use an external network, uncomment:
-# networks:
-#   ${DOCKER_NETWORK}:
-#     external: true
+networks:
+  ${DOCKER_NETWORK}:
+    external: true
